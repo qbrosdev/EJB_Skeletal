@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qbros</groupId>
+    <artifactId>webServerRootPOM</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!--EAR vs WAR: https://stackoverflow.com/questions/1594667/war-vs-ear-file
+    https://stackoverflow.com/questions/4441237/packaging-ejb-in-javaee-6-war-vs-ear-->
+
+    <properties>
+        <!-- maven default properties -->
+        <encoding>UTF-8</encoding>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <ejb.ejbVersion>3.2</ejb.ejbVersion>
+        <ejb.generateClient>true</ejb.generateClient>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <maven.ear.duplicateArtifactsBreakTheBuild>true</maven.ear.duplicateArtifactsBreakTheBuild>
+        <skipITs>true</skipITs>
+
+        <!--dependency versions-->
+        <ejb.api.ver>3.2</ejb.api.ver>
+        <ws.api.ver>2.0</ws.api.ver>
+        <persistance.api.ver>2.2</persistance.api.ver>
+        <javax.inject.ver>1</javax.inject.ver>
+        <javax.validation.api.ver>1.1.0.Final</javax.validation.api.ver>
+        <cdi.api.ver>1.0-SP4</cdi.api.ver>
+        <hibernate.core>4.3.9.Final</hibernate.core>
+        <jwt>0.9.1</jwt>
+        <shiro>1.4.0</shiro>
+        <jBCrypt>0.4.1</jBCrypt>
+        <commns.io>2.4</commns.io>
+        <databind>2.5.0</databind>
+        <pax.shiro>0.1.0</pax.shiro>
+        <servlet.api>3.1.0</servlet.api>
+        <slf4j>1.7.25</slf4j>
+    </properties>
+
+    <modules>
+        <module>Aggregator</module>
+        <module>BASE</module>
+        <module>EJB_Token</module>
+        <module>EJB_API</module>
+        <module>EJB_JPA</module>
+        <module>EJB_Service</module>
+        <module>EJB_Rest_EndPoint</module>
+        <module>FinalBOOM</module>
+    </modules>
+
+    <!--Dependency management tag: https://stackoverflow.com/a/37280943/3593084-->
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.qbros</groupId>
+                <artifactId>Aggregator</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qbros</groupId>
+                <artifactId>BASE</artifactId>
+                <version>${project.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qbros</groupId>
+                <artifactId>EJB_Token</artifactId>
+                <version>${project.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qbros</groupId>
+                <artifactId>EJB_API</artifactId>
+                <version>${project.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qbros</groupId>
+                <artifactId>EJB_Service</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qbros</groupId>
+                <artifactId>EJB_JPA</artifactId>
+                <version>${project.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qbros</groupId>
+                <artifactId>EJB_Rest_EndPoint</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--SLF4J-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${databind}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.enterprise</groupId>
+                <artifactId>cdi-api</artifactId>
+                <version>${cdi.api.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${ws.api.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.shiro</groupId>
+                <artifactId>pax-shiro-cdi</artifactId>
+                <version>${pax.shiro}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.shiro</groupId>
+                        <artifactId>shiro-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-all</artifactId>
+                <version>${shiro}</version>
+                <type>pom</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.ejb</groupId>
+                <artifactId>javax.ejb-api</artifactId>
+                <version>${ejb.api.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>${persistance.api.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${javax.validation.api.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.core}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.svenkubiak</groupId>
+                <artifactId>jBCrypt</artifactId>
+                <version>${jBCrypt}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commns.io}</version>
+            </dependency>
+
+            <!--JWT token generation libraries LINK: https://stackoverflow.com/a/46553386/3593084-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.api}</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <configuration>
+                        <rules>
+                            <dependencyConvergence>
+
+                            </dependencyConvergence>
+                            <bannedDependencies>
+                                <excludes>
+                                    <!-- exclude all versions lower than 1.2.17-->
+                                    <exclude>log4j:log4j:[0.0,1.7.25)</exclude>
+                                </excludes>
+                                <message>A banned dependency or plugin was found!</message>
+                            </bannedDependencies>
+                        </rules>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>validate_Enforce</id>
+                            <phase>validate</phase>
+                            <goals><goal>display-info</goal></goals>
+                        </execution>
+                        <execution>
+                            <id>pack_enforce</id>
+                            <phase>package</phase>
+                            <goals><goal>enforce</goal></goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

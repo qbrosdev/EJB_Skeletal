@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.qbros</groupId>
+        <artifactId>webServerRootPOM</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>BOOM</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>ear</packaging>
+
+    <name>FinalBOOM</name>
+    <description>the final BOOM!</description>
+
+    <!--all the modules which need to be packaged in ear file need to be added as
+    a dependency here
+    JPA module should be added in the lib folder link:JPA module should be added in the lib folder-->
+
+    <dependencies>
+
+        <!--All the dependencies which are defined here will be added to ear package-->
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>Aggregator</artifactId>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>BASE</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>EJB_API</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>EJB_Token</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>EJB_JPA</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>EJB_Service</artifactId>
+            <type>ejb</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>EJB_Rest_EndPoint</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <!--Shared dependencies of the skiney WARs-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>Final</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <!--note: do not use fancy names for lib directory, your container might not be able to find it -->
+                    <defaultLibBundleDir>lib/</defaultLibBundleDir>
+                    <skinnyWars>false</skinnyWars>
+                    <modules>
+                        <!--Web-->
+                        <webModule>
+                            <groupId>com.qbros</groupId>
+                            <artifactId>EJB_Rest_EndPoint</artifactId>
+                            <contextRoot>/</contextRoot>
+                        </webModule>
+                        <!--EJB-->
+                        <ejbModule>
+                            <groupId>com.qbros</groupId>
+                            <artifactId>EJB_Service</artifactId>
+                        </ejbModule>
+                        <!--Persistence-->
+                        <jarModule>
+                            <groupId>com.qbros</groupId>
+                            <artifactId>EJB_JPA</artifactId>
+                        </jarModule>
+                        <!--All the jars-->
+                        <jarModule>
+                            <groupId>com.qbros</groupId>
+                            <artifactId>BASE</artifactId>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>com.qbros</groupId>
+                            <artifactId>EJB_API</artifactId>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>com.qbros</groupId>
+                            <artifactId>EJB_Token</artifactId>
+                        </jarModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

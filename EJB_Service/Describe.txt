@@ -1,0 +1,5 @@
+https://stackoverflow.com/questions/26777083/best-practice-for-rest-token-based-authentication-with-jax-rs-and-jersey
+http://www.simplex-software.fr/fr/blog/how-to-secure-rest-apis-jax-rs-with-oauth-2-0-openid-connect-keycloak-and-dockers/16
+
+/////////////////Access timeout
+http://openejb.apache.org/examples-trunk/access-timeout/

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <parent>
+        <groupId>com.qbros</groupId>
+        <artifactId>webServerRootPOM</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>EJB_API</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>API</name>
+    <description>A simple API.</description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>BASE</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qbros</groupId>
+            <artifactId>EJB_Token</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.earldouglas/seek-well -->
+        <dependency>
+            <groupId>com.earldouglas</groupId>
+            <artifactId>seek-well_2.10</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <finalName>API</finalName>
+    </build>
+</project>
