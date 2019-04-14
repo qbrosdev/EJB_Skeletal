@@ -50,7 +50,7 @@
         <module>EJB_API</module>
         <module>EJB_JPA</module>
         <module>EJB_Service</module>
-        <module>EJB_Rest_EndPoint</module>
+        <module>EJB_HTTP_EndPoint</module>
         <module>FinalBOOM</module>
     </modules>
 
@@ -103,7 +103,7 @@
 
             <dependency>
                 <groupId>com.qbros</groupId>
-                <artifactId>EJB_Rest_EndPoint</artifactId>
+                <artifactId>EJB_HTTP_EndPoint</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
                 <scope>provided</scope>
