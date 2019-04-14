@@ -57,7 +57,7 @@
 
         <dependency>
             <groupId>com.qbros</groupId>
-            <artifactId>EJB_Rest_EndPoint</artifactId>
+            <artifactId>EJB_HTTP_EndPoint</artifactId>
             <type>war</type>
         </dependency>
 
@@ -83,7 +83,7 @@
                         <!--Web-->
                         <webModule>
                             <groupId>com.qbros</groupId>
-                            <artifactId>EJB_Rest_EndPoint</artifactId>
+                            <artifactId>EJB_HTTP_EndPoint</artifactId>
                             <contextRoot>/</contextRoot>
                         </webModule>
                         <!--EJB-->

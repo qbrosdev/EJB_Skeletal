@@ -1,0 +1,29 @@
+[main]
+ssl.enabled = false
+
+# there are different pasword matching mechanisems org.apache.shiro.authc.credential.SimpleCredentialsMatcher
+# or PasswordMatcher. they all take a token to authenticate;
+passwordMatcher = org.apache.shiro.authc.credential.SimpleCredentialsMatcher
+
+#------------------Hard code format without Realm-----------------------------------------------------------------------
+# username = password, roleName
+[users]
+root  = 123,admin
+user = 123,sysuser
+top = 123,topuser
+
+[roles]
+admin = *
+topuser = user:*,topuser:*
+sysuser = user:baseaction:*
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Filter Setup
+filterInternal = com.qbros.Shiro.Filter.JwtOrFormAuthNFilter
+filterInternal.loginUrl = /api/open/**
+
+[urls]
+#/api/admin/** = noSessionCreation, jwtAuth, roles[admin]
+#/api/user/** = noSessionCreation, jwtAuth, roles[sysuser]
+#/api/open/** = anon
+/** = authcBasic
