@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -27,13 +28,20 @@ public abstract class BaseDao <T extends BaseEntity> {
 
     public abstract Class<T> getEntityClass();
 
-
     private void init(){
         //Since version 2.0, JPA provides easy access to the APIs of the underlying implementations. The EntityManager
         // and the EntityManagerFactory provide an unwrap method which returns the corresponding classes of the JPA implementation.
         Session session = em.unwrap(Session.class);
     }
 
+    public T create(T entity) {
+        try {
+            em.persist(entity);
+            return entity;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     //Persist Vs Merge: https://stackoverflow.com/questions/1069992/jpa-entitymanager-why-use-persist-over-merge
     protected T updateEntity(T entity){
@@ -63,6 +71,19 @@ public abstract class BaseDao <T extends BaseEntity> {
         //BUT we also need to make the process faster so: hibernate.jdbc.batch_size: This tag controls the maximum
         // number of statements that Hibernate will batch together before asking the driver to execute the batch.
         // Zero or a negative number disables this feature
+    }
+
+    public List<T> findAll(String query, boolean isNamedQuery) {
+        try {
+            return isNamedQuery ? em.createNamedQuery(query).getResultList() : em.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Optional<T> findById(Long userId) {
+        return Optional.ofNullable(em.find(getEntityClass(), userId));
     }
 
 }
