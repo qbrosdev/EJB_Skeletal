@@ -8,15 +8,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-// managed ejbs will reflect changes on db https://stackoverflow.com/questions/29035348/ejb-entity-database-row-is-automatically-updated-from-entity-without-save-in-ej#
+/**
+ *
+ *  managed ejbs will reflect changes on db https://stackoverflow.com/questions/29035348/ejb-entity-database-row-is-automatically-updated-from-entity-without-save-in-ej#
+ *
+ *  the returned entity form merge is managed not the entity that is passed to it
+ * https://stackoverflow.com/a/1070629/3593084
+ *
+ * -------------------------------------------------
+ * if you dont use ejb or other frameworks, you have to manage ejbs yourself like this
+ * https://stackoverflow.com/questions/40635734/using-generics-and-jpa-entitymanager-methods
+ */
 
-// the returned entity form merge is managed not the entity that is passed to it
-//https://stackoverflow.com/a/1070629/3593084
-
-//-------------------------------------------------
-//if you dont use ejb or other frameworks, you have to manage ejbs yourself like this
-//https://stackoverflow.com/questions/40635734/using-generics-and-jpa-entitymanager-methods
 public abstract class BaseDao <T extends BaseEntity> {
+
     @PersistenceContext(unitName = "MYSQLDS")
     protected EntityManager em;
 
@@ -50,7 +55,6 @@ public abstract class BaseDao <T extends BaseEntity> {
         for (T itemT : entityList) {
             em.merge(itemT);
         }
-
         //By default, Hibernate framework will cache all the persisted objects in the session-level cache
         // and ultimately the application would fall over with an OutOfMemoryException. this is for clearing the memory
         // that hibernate cache takes.

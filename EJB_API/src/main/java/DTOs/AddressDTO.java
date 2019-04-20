@@ -4,22 +4,13 @@ package DTOs;
  * Created by V.Ghasemi
  * on 12/16/2018.
  */
-public class AddressDTO {
+public class AddressDTO extends BaseDTO {
 
-    private Integer id;
     private String street;
     private String city;
     private String province;
     private String country;
     private String postcode;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getStreet() {
         return street;

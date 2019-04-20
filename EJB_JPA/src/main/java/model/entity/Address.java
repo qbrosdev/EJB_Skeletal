@@ -12,94 +12,57 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "address")
-public class Address {
+public class Address extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    //https://www.objectdb.com/java/jpa/entity/generated
-    //the hibernate_sequence table created in the database
-    private Integer id;
     private String street;
     private String city;
     private String province;
     private String country;
     private String postcode;
+
     /**
-     * @return the id
+     * JPA entity needs an empty constructor just in case you add custom construcotrs later on
+     * https://stackoverflow.com/a/18099188/3593084
      */
-    public Integer getId() {
-        return id;
-    }
-    /**
-     * @param id the id to set
-     */
-    public Address setId(Integer id) {
-        this.id = id;
-        return this;
-    }
-    /**
-     * @return the street
-     */
+    public Address() { }
+
     public String getStreet() {
         return street;
     }
-    /**
-     * @param street the street to set
-     */
-    public Address setStreet(String street) {
+
+    public void setStreet(String street) {
         this.street = street;
-        return this;
     }
-    /**
-     * @return the city
-     */
+
     public String getCity() {
         return city;
     }
-    /**
-     * @param city the city to set
-     */
-    public Address setCity(String city) {
+
+    public void setCity(String city) {
         this.city = city;
-        return this;
     }
-    /**
-     * @return the province
-     */
+
     public String getProvince() {
         return province;
     }
-    /**
-     * @param province the province to set
-     */
-    public Address setProvince(String province) {
+
+    public void setProvince(String province) {
         this.province = province;
-        return this;
     }
-    /**
-     * @return the country
-     */
+
     public String getCountry() {
         return country;
     }
-    /**
-     * @param country the country to set
-     */
-    public Address setCountry(String country) {
+
+    public void setCountry(String country) {
         this.country = country;
-        return this;
     }
-    /**
-     * @return the postcode
-     */
+
     public String getPostcode() {
         return postcode;
     }
-    /**
-     * @param postcode the postcode to set
-     */
-    public Address setPostcode(String postcode) {
+
+    public void setPostcode(String postcode) {
         this.postcode = postcode;
-        return this;
     }
 }

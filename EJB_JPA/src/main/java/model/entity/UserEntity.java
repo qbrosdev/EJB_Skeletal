@@ -5,12 +5,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-/**
- * Persistence model that represents a user.
- *
- * @author cassiomolin
- */
-
 /*
 User is a resever word so we use UserItem for the entity
 https://stackoverflow.com/questions/38818302/incorrect-syntax-near-the-keyword-table-and-could-not-extract-resultset
@@ -19,11 +13,7 @@ naming entities:
 https://stackoverflow.com/questions/18732646/name-attribute-in-entity-and-table
  */
 @Entity(name = "UserItem")
-public class UserItem implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+public class UserEntity extends BaseEntity implements Serializable {
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -47,14 +37,6 @@ public class UserItem implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "authority")
     private Set<Role> authorities;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -116,8 +98,8 @@ public class UserItem implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserItem userItem = (UserItem) o;
-        return username != null ? username.equals(userItem.username) : userItem.username == null;
+        UserEntity userEntity = (UserEntity) o;
+        return username != null ? username.equals(userEntity.username) : userEntity.username == null;
     }
 
     @Override
