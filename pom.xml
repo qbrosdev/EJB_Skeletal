@@ -8,9 +8,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <!--EAR vs WAR: https://stackoverflow.com/questions/1594667/war-vs-ear-file
-    https://stackoverflow.com/questions/4441237/packaging-ejb-in-javaee-6-war-vs-ear-->
-
     <properties>
         <!-- maven default properties -->
         <encoding>UTF-8</encoding>
@@ -219,7 +216,6 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet.api}</version>
             </dependency>
-
 
         </dependencies>
     </dependencyManagement>

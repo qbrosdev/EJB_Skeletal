@@ -1,9 +1,10 @@
 package com.qbros.Shiro.Filter;
 
-import Utils.JsonObjConv;
+import Utils.JsonMapper;
 import intf.iTokenProvider;
 import model.credential.Token.ShiroLoginToken;
 import model.credential.Token.ShiroToken;
+import org.apache.commons.io.IOUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -15,11 +16,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import org.apache.commons.io.IOUtils;
-
 import javax.ws.rs.core.HttpHeaders;
+import java.io.IOException;
 
 /*
 https://github.com/panchitoboy/shiro-jwt/blob/master/src/main/java/com/github/panchitoboy/shiro/jwt/filter/JWTOrFormAuthenticationFilter.java
@@ -110,7 +108,7 @@ public class JwtOrFormAuthNFilter extends AuthenticatingFilter {
     private AuthenticationToken generateLoginToken(ServletRequest request) throws IOException {
         String jsonString = IOUtils.toString(request.getInputStream());
         if(jsonString != null && !jsonString.isEmpty()){
-            return JsonObjConv.JsonStringToObj(jsonString, ShiroLoginToken.class);
+            return JsonMapper.JsonStringToObj(jsonString, ShiroLoginToken.class);
         }else {
             return generateDummyToken();
         }

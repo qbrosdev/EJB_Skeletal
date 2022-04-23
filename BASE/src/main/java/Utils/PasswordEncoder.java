@@ -9,7 +9,6 @@ import javax.enterprise.context.ApplicationScoped;
 /**
  * bcrypt password encoder.
  *
- * @author cassiomolin
  */
 @ApplicationScoped
 public class PasswordEncoder {
@@ -37,7 +36,6 @@ public class PasswordEncoder {
         if (null == hashedPassword || !hashedPassword.startsWith("$2a$")) {
             throw new RuntimeException("Hashed password is invalid");
         }
-
         return BCrypt.checkpw(plainTextPassword, hashedPassword);
     }
 }

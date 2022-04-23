@@ -8,7 +8,7 @@ import java.io.IOException;
 
 
 
-public class JsonObjConv {
+public class JsonMapper {
 
     public static String ERR_STRING = "ERR";
 
@@ -16,7 +16,8 @@ public class JsonObjConv {
         if (notValid(jsonString)) {
             return null;
         } else {
-            ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);;
+            ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            ;
             try {
                 return objectMapper.readValue(jsonString, valueType);
             } catch (IOException e) {
